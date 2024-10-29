@@ -1,7 +1,6 @@
 const products = [
 
     {
-        _id: '1',
         name: 'Product 1 elipses text test lorem ipsum',
         image: '/images/alexa.jpg',
         description:
@@ -16,7 +15,6 @@ const products = [
     },
 
     {
-        _id: '2',
         name: 'Product 2',
         image: '/images/airpods.jpg',
         description:
@@ -31,7 +29,6 @@ const products = [
     },
 
     {
-        _id: '3',
         name: 'Product 3',
         image: '/images/camera.jpg',
         description:
@@ -46,7 +43,6 @@ const products = [
     },
 
     {
-        _id: '4',
         name: 'Product 4',
         image: '/images/sample.jpg',
         description:
@@ -61,7 +57,6 @@ const products = [
     },
 
     {
-        _id: '5',
         name: 'Product 5',
         image: '/images/phone.jpg',
         description:
@@ -76,7 +71,6 @@ const products = [
     },
 
     {
-        _id: '6',
         name: 'Product 6',
         image: '/images/playstation.jpg',
         description:
