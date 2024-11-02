@@ -19,16 +19,8 @@ Make sure you have the following installed on your system:
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/your-ecommerce-project.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd your-ecommerce-project
-   ```
-
+1. Clone the repository.
+2. Navigate to the project directory.
 3. Install dependencies:
    ```bash
    npm install
