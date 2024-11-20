@@ -24,11 +24,10 @@ const RegisterScreen = () => {
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
   const redirect = sp.get("redirect") || "/";
-  console.log("Redirect value:", redirect);
+  
 
   useEffect(() => {
     if (userInfo) {
-      console.log("Redirecting to:", redirect);
       navigate(redirect);
     }
   }, [userInfo, redirect, navigate]);
@@ -110,7 +109,9 @@ const RegisterScreen = () => {
       <Row className="py-3">
   <Col>
     Already have an account?{" "}
-    <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+    <Link 
+      to={
+        redirect ? `/login?redirect=${redirect}` : "/login"}>
       Login
     </Link>
   </Col>
