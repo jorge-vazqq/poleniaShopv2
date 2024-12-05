@@ -1,0 +1,33 @@
+/* Header */
+.custom-navbar {
+    background-color: #fc9e3a;
+    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+#username {
+    color:#6153e0;
+}
+
+#cart-title{
+    color:#6153e0;
+}
+
+#badge-color{
+    background-color:#d6e012 !important;
+    color:#fffbf4;
+
+}
+
+
+/* Truncate text in product title */
+.card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Limit the title to 2 lines, adjust as needed */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-spinner{
+    color:#6153e0;
+}

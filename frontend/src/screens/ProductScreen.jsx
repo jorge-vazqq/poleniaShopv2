@@ -64,9 +64,9 @@ const ProductScreen = () => {
                   text={`${product.numReviews} reviews`}
                 />
               </ListGroup.Item>
-              <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+              <ListGroup.Item><p>Price: ${product.price}</p></ListGroup.Item>
               <ListGroup.Item>
-                Description: {product.description}
+                <p>Description: {product.description}</p>
               </ListGroup.Item>
             </ListGroup>
           </Col>
@@ -75,19 +75,19 @@ const ProductScreen = () => {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Price:</Col>
+                    <Col><p>Price:</p></Col>
                     <Col>
-                      <strong>${product.price}</strong>
+                      <b>${product.price}</b>
                     </Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Status:</Col>
+                    <Col><p>Status:</p></Col>
                     <Col>
-                      <strong>
+                      <b>
                         {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
-                      </strong>
+                      </b>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -95,7 +95,7 @@ const ProductScreen = () => {
                 {product.countInStock > 0 && (
                   <ListGroupItem>
                     <Row>
-                      <Col>Qty</Col>
+                      <Col><p>Qty</p></Col>
                       <Col>
                         <Form.Control
                           as="select"

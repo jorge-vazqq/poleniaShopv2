@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+body {
+    background-color: #fffbf4; /* Change this to your desired color */
+  }
+
+h1 {
+    color:  #6153e0;
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+h2 {
+    color:  #6153e0;
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+h3 {
+    color:  #6153e0;
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+p{
+    color:  #6153e0;
+    font-family: "Montserrat", sans-serif;
+}
+
+b{
+    color:  #6153e0;
+    font-family: "Montserrat", sans-serif;
+}
+
+.custom-link{
+    color:  #6153e0;
+    font-family: "Montserrat", sans-serif;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Regular link style */
+.nav-link {
+    color: #6153e0;
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+  
+  /* Hover state */
+  .nav-link:hover {
+    color: #ddc7ff !important;
+  }
+  
+  /* Active state (for the current page) */
+  .nav-link.active {
+    color: #6153e0 !important; /* Prevents the hover style from overriding the active state */
+  }
+
+  .nav-link.active:hover {
+    color: #ddc7ff !important; /* Prevents the hover style from overriding the active state */
+  }
+  
+  /* Prevent the active state from conflicting with hover */
+  .nav-link:not(.active):hover {
+    color: #ddc7ff !important;
+  }
+
+
+.form-label{
+    color:  #6153e0;
+    font-family: "Montserrat", sans-serif;
+}
+
+.form-control {
+    color: black; /* Set text color to black by default */
+  }
+  
+  .form-control:focus {
+    color: black; /* Keep text color black when the input is focused */
+  }

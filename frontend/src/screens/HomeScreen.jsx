@@ -3,6 +3,7 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
+import screensStyles from '../styles/screensStyles.css';
 
 const HomeScreen = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
