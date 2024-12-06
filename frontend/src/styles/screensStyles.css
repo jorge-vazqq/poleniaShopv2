@@ -64,6 +64,12 @@ b{
   }
 
 
+  .link-container.active {
+    color: inherit; /* Keep default color */
+    background-color: transparent; /* No background for active state */
+  }
+
+
 .form-label{
     color:  #6153e0;
     font-family: "Montserrat", sans-serif;

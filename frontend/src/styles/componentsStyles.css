@@ -8,6 +8,10 @@
     color:#6153e0;
 }
 
+#adminmenu {
+  color:#6153e0;
+}
+
 #cart-title{
     color:#6153e0;
 }
@@ -31,3 +35,14 @@
 .custom-spinner{
     color:#6153e0;
 }
+
+#carousel-caption {
+    color: white;
+
+  }
+
+.carousel{
+    padding-top:2%;
+    padding-bottom: 4%;
+}
+  

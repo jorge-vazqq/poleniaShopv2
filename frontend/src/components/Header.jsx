@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { Badge, Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
@@ -14,7 +14,7 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();  // Get current route
+  const location = useLocation(); // Get current route
 
   const [logoutApiCall] = useLogoutMutation();
 
@@ -29,7 +29,7 @@ const Header = () => {
   };
 
   // Check if the current route is login page
-  const isLoginPage = location.pathname === '/login';
+  const isLoginPage = location.pathname === "/login";
 
   return (
     <header>
@@ -50,7 +50,11 @@ const Header = () => {
                     <Nav.Link id="cart-title">
                       <FaShoppingCart /> Cart
                       {cartItems.length > 0 && (
-                        <Badge pill id="badge-color" style={{ marginLeft: "5px" }}>
+                        <Badge
+                          pill
+                          id="badge-color"
+                          style={{ marginLeft: "5px" }}
+                        >
                           {cartItems.reduce((a, c) => a + c.qty, 0)}
                         </Badge>
                       )}
@@ -58,10 +62,16 @@ const Header = () => {
                   </LinkContainer>
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="username">
-                      <LinkContainer to="/profile">
-                        <NavDropdown.Item >Profile</NavDropdown.Item>
+                      <LinkContainer
+                        to="/profile"
+                        active={false}
+                        className="link-container"
+                      >
+                        <NavDropdown.Item>Profile</NavDropdown.Item>
                       </LinkContainer>
-                      <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                      <NavDropdown.Item onClick={logoutHandler}>
+                        Logout
+                      </NavDropdown.Item>
                     </NavDropdown>
                   ) : (
                     <LinkContainer to="/login">
@@ -70,6 +80,19 @@ const Header = () => {
                         Sign In
                       </Nav.Link>
                     </LinkContainer>
+                  )}
+                  {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title="Admin" id="adminmenu">
+                      <LinkContainer to="/admin/productlist" className="link-container">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/orderlist" className="link-container">
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/userlist" className="link-container">
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
                   )}
                 </>
               )}
