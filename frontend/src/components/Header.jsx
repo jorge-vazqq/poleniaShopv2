@@ -1,12 +1,20 @@
+import React, { useState } from "react";
+import DrawerFilters from "./InsetDrawer";
+
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { Badge, Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Badge, Navbar, Nav, Container } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import logo from "../assets/logo.png";
-import componentsStyles from '../styles/componentsStyles.css';
+import Button from "@mui/joy/Button";
+import Menu from "@mui/joy/Menu";
+import MenuButton from "@mui/joy/MenuButton";
+import MenuItem from "@mui/joy/MenuItem";
+import Dropdown from "@mui/joy/Dropdown";
+import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -15,6 +23,12 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation(); // Get current route
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setDrawerOpen((prev) => !prev);
+  };
 
   const [logoutApiCall] = useLogoutMutation();
 
@@ -44,55 +58,67 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               {/* Conditionally render cart and sign in buttons based on location */}
-              {!isLoginPage && (
+              {!(isLoginPage || location.pathname === "/register") && (
                 <>
-                  <LinkContainer to="/cart">
-                    <Nav.Link id="cart-title">
-                      <FaShoppingCart /> Cart
-                      {cartItems.length > 0 && (
-                        <Badge
-                          pill
-                          id="badge-color"
-                          style={{ marginLeft: "5px" }}
-                        >
-                          {cartItems.reduce((a, c) => a + c.qty, 0)}
-                        </Badge>
-                      )}
-                    </Nav.Link>
-                  </LinkContainer>
+                  <Button 
+                  onClick={toggleDrawer}
+                  sx={{ margin: 0.5 }}
+                  ><FaShoppingCart sx={{ mr: 1 }} /> Cart
+                  {cartItems.length > 0 && (
+                    <Badge
+                      pill
+                      id="badge-color"
+                      style={{ marginLeft: "5px" }}
+                    >
+                      {cartItems.reduce((a, c) => a + c.qty, 0)}
+                    </Badge>
+                  )}</Button>
+                  {/* Render the DrawerFilters */}
+                  <DrawerFilters open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+
                   {userInfo ? (
-                    <NavDropdown title={userInfo.name} id="username">
-                      <LinkContainer
-                        to="/profile"
-                        active={false}
-                        className="link-container"
+                    <Dropdown>
+                      <MenuButton
+                        endDecorator={<ArrowDropDown />}
+                        sx={{ margin: 0.5 }}
                       >
-                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                      </LinkContainer>
-                      <NavDropdown.Item onClick={logoutHandler}>
-                        Logout
-                      </NavDropdown.Item>
-                    </NavDropdown>
+                        {userInfo.name}
+                      </MenuButton>
+                      <Menu size="md" placement="bottom-start">
+                        <MenuItem component={Link} to="/profile">
+                          Profile
+                        </MenuItem>
+                        <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+                      </Menu>
+                    </Dropdown>
                   ) : (
                     <LinkContainer to="/login">
-                      <Nav.Link>
+                      <Button sx={{ margin: 0.5 }}>
                         <FaUser />
                         Sign In
-                      </Nav.Link>
+                      </Button>
                     </LinkContainer>
                   )}
                   {userInfo && userInfo.isAdmin && (
-                    <NavDropdown title="Admin" id="adminmenu">
-                      <LinkContainer to="/admin/productlist" className="link-container">
-                        <NavDropdown.Item>Products</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/admin/orderlist" className="link-container">
-                        <NavDropdown.Item>Orders</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/admin/userlist" className="link-container">
-                        <NavDropdown.Item>Users</NavDropdown.Item>
-                      </LinkContainer>
-                    </NavDropdown>
+                    <Dropdown>
+                      <MenuButton
+                        endDecorator={<ArrowDropDown />}
+                        sx={{ margin: 0.5 }}
+                      >
+                        Admin
+                      </MenuButton>
+                      <Menu placement="bottom-start">
+                        <MenuItem component={Link} to="/admin/productlist">
+                          Products
+                        </MenuItem>
+                        <MenuItem component={Link} to="/admin/orderlist">
+                          Orders
+                        </MenuItem>
+                        <MenuItem component={Link} to="/admin/userlist">
+                          Users
+                        </MenuItem>
+                      </Menu>
+                    </Dropdown>
                   )}
                 </>
               )}

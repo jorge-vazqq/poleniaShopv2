@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form  } from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import { saveShippingAddress } from '../slices/cartSlice';
 import CheckoutSteps from '../components/CheckoutSteps';
+import Button from "@mui/joy/Button";
+import Card from "@mui/joy/Card";
 
 const ShippingScreen = () => {
     const cart = useSelector((state) => state.cart );
@@ -26,7 +28,7 @@ const ShippingScreen = () => {
 
   return <FormContainer>
             <CheckoutSteps step1 step2 />
-
+    <Card className='card'>
     <h1>Shipping</h1>
     <Form onSubmit={submitHandler}>
         <Form.Group controlId='address' className='my-2'>
@@ -50,12 +52,12 @@ const ShippingScreen = () => {
             {country} onChange={(e) => setCountry(e.target.value)}></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary' className='my-2'>
+        <Button type='submit'>
             Continue
         </Button>
 
     </Form>
-
+    </Card>
   </FormContainer>
 };
 

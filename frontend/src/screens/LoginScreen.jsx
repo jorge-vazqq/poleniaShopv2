@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import Loader from "../components/Loader";
 import { useLoginMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import Button from "@mui/joy/Button";
+import Card from '@mui/joy/Card';
+import { ListDivider } from "@mui/joy";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -42,7 +45,9 @@ const LoginScreen = () => {
 
   return (
     <FormContainer>
+      <Card className='card' sx={{mt: 8,}}>
       <h1>Sign In</h1>
+      <ListDivider/>
 
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email" className="my-3">
@@ -67,8 +72,6 @@ const LoginScreen = () => {
 
         <Button
           type="submit"
-          variant="primary"
-          className="mt-2"
           disabled={isLoading}
         >
           Sign In
@@ -87,6 +90,7 @@ const LoginScreen = () => {
           </Link>
         </Col>
       </Row>
+      </Card>
     </FormContainer>
   );
 };

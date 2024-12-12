@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import Loader from "../components/Loader";
 import { useRegisterMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import Card from "@mui/joy/Card";
+import Button from "@mui/joy/Button";
 
 const RegisterScreen = () => {
   const [name, setName] = useState("");
@@ -49,7 +51,9 @@ const RegisterScreen = () => {
   };
 
   return (
+    
     <FormContainer>
+      <Card className='card' sx={{mt: 8}}>
       <h1>Sign Up</h1>
 
       <Form onSubmit={submitHandler}>
@@ -96,8 +100,6 @@ const RegisterScreen = () => {
 
         <Button
           type="submit"
-          variant="primary"
-          className="mt-2"
           disabled={isLoading}
         >
           Register
@@ -116,7 +118,9 @@ const RegisterScreen = () => {
     </Link>
   </Col>
 </Row>
+</Card>
     </FormContainer>
+
   );
 };
 

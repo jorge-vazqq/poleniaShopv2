@@ -1,9 +1,10 @@
-import { Table, Button } from 'react-bootstrap';
+import Table from '@mui/joy/Table';
 import { FaTimes } from 'react-icons/fa';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { useGetOrdersQuery } from '../../slices/ordersApiSlice';
 import { Link } from 'react-router-dom';
+import Button from "@mui/joy/Button";
 
 const OrderListScreen = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
@@ -18,7 +19,7 @@ const OrderListScreen = () => {
           {error?.data?.message || error.error}
         </Message>
       ) : (
-        <Table striped bordered hover responsive className='table-sm'>
+        <Table striped bordered hoverRow responsive className='table-sm'>
           <thead>
             <tr>
               <th>ID</th>
@@ -53,10 +54,9 @@ const OrderListScreen = () => {
                 </td>
                 <td>
                   <Button
-                    as={Link}
+                    component={Link}
                     to={`/order/${order._id}`}
-                    variant='light'
-                    className='btn-sm'
+                    variant='soft'
                   >
                     Details
                   </Button>

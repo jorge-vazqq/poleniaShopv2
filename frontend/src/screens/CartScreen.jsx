@@ -6,12 +6,12 @@ import {
   ListGroup,
   Image,
   Form,
-  Button,
-  Card,
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import Message from "../components/Message";
 import { addToCart, removeFromCart} from "../slices/cartSlice";
+import Button from "@mui/joy/Button";
+import Card from "@mui/joy/Card";
 
 const CartScreen = () => {
   const navigate = useNavigate();
@@ -33,9 +33,14 @@ const CartScreen = () => {
   };
 
   return (
+    
+    
+
     <Row>
       <Col md={8}>
+      <Card className='card'>
         <h1 style={{ marginBottom: "20px" }}>Shopping Cart</h1>
+        
         {cartItems.length === 0 ? (
           <Message>
             Your cart is empty <Link to="/">Go back</Link>
@@ -68,18 +73,20 @@ const CartScreen = () => {
                     </Form.Control>
                   </Col>
                   <Col md={2}>
-                    <Button type="button" variant="light" onClick={()=> removeFromCartHandler(item._id)}>
+                    <Button onClick={()=> removeFromCartHandler(item._id)}>
                       <FaTrash />
                     </Button>
                   </Col>
+                  
                 </Row>
               </ListGroup.Item>
             ))}
           </ListGroup>
         )}
+        </Card>
       </Col>
       <Col md={4}>
-        <Card>
+        <Card className='card'>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>
@@ -96,7 +103,6 @@ const CartScreen = () => {
             <ListGroup.Item>
               <Button
                 type="button"
-                className="btn-block"
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >
@@ -107,6 +113,9 @@ const CartScreen = () => {
         </Card>
       </Col>
     </Row>
+
+                
+
   );
 };
 

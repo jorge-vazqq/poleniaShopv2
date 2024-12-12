@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ import {
   usePayOrderMutation,
   useDeliverOrderMutation,
 } from "../slices/ordersApiSlice";
+import Button from '@mui/joy/Button';
 
 const OrderScreen = () => {
   const { id: orderId } = useParams();
@@ -264,8 +265,6 @@ const OrderScreen = () => {
                 !order.isDelivered && (
                   <ListGroup.Item>
                     <Button
-                      type="button"
-                      className="btn btn-block"
                       onClick={deliverHandler}
                     >
                       Mark As Delivered

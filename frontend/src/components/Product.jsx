@@ -1,32 +1,44 @@
-import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import Typography from "@mui/joy/Typography";
 
 const Product = ({ product }) => {
   return (
-    <Card className="my-3 p-3 rounded product-card">
-      <Link to={`/product/${product._id}`}>
-        <Card.Img src={product.image} variant="top" />
-      </Link>
+    <Card className='card'>
+      <Link to={`/product/${product._id}`} className="custom-link">
+        <img
+          src={product.image}
+          alt={product.name}
+          style={{
+            marginBottom:'2%',
+            width: "100%",
+            height: "200px",
+            objectFit: "cover",
+          }}
+        />
+      
 
-      <Card.Body>
+      <CardContent>
         <Link to={`/product/${product._id}`} className="custom-link">
-          <Card.Title as="div" className="card-title">
+          <Typography className='card-title' level="h5" component="div" sx={{ mb: 1 }}>
             {product.name}
-          </Card.Title>
+          </Typography>
         </Link>
 
-        <Card.Text as="div" className="card-text">
+        <Typography level="body2" sx={{ mb: 1 }}>
           <Rating
             value={product.rating}
             text={`${product.numReviews} reviews`}
           />
-        </Card.Text>
+        </Typography>
 
-        <Card.Text as="h3" className="card-price">
+        <Typography level="h6">
           ${product.price}
-          </Card.Text>
-      </Card.Body>
+        </Typography>
+      </CardContent>
+      </Link>
     </Card>
   );
 };

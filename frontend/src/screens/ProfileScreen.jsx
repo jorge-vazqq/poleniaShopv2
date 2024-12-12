@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Table, Form, Button, Row, Col } from "react-bootstrap";
+import { Table, Form, Row, Col } from "react-bootstrap";
+import Button from "@mui/joy/Button";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, Toast } from "react-toastify";
@@ -101,7 +102,7 @@ const ProfileScreen = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="primary" className="my-2">
+          <Button type="submit">
             Update
           </Button>
           {loadingUpdateProfile && <Loader />}
@@ -149,7 +150,7 @@ const ProfileScreen = () => {
                   </td>
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
-                        <Button className='btn-sm' variant='light'>
+                        <Button className='btn-sm' variant='soft'>
                             Details
                         </Button>
                     </LinkContainer>

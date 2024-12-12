@@ -4,16 +4,9 @@
     box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-#username {
-    color:#6153e0;
-}
-
-#adminmenu {
-  color:#6153e0;
-}
-
-#cart-title{
-    color:#6153e0;
+.card{
+  box-shadow: var(--joy-shadow-lg);
+  margin-bottom: 2vh;
 }
 
 #badge-color{
@@ -22,14 +15,11 @@
 
 }
 
-
 /* Truncate text in product title */
 .card-title {
-  display: -webkit-box;
-  -webkit-line-clamp: 1; /* Limit the title to 2 lines, adjust as needed */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap;         /* Prevent line breaks */
+  overflow: hidden;           /* Hide overflow text */
+  text-overflow: ellipsis;    /* Add ellipsis (...) */
 }
 
 .custom-spinner{

@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 import Loader from "../components/Loader";
 import { useCreateOrderMutation } from "../slices/ordersApiSlice";
 import { clearCartItems } from "../slices/cartSlice";
+import Button from "@mui/joy/Button";
+import Card from '@mui/joy/Card';
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
@@ -48,6 +50,7 @@ const PlaceOrderScreen = () => {
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>
+        <Card className='card'>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
@@ -100,9 +103,10 @@ const PlaceOrderScreen = () => {
               )}
             </ListGroup.Item>
           </ListGroup>
+          </Card>
         </Col>
         <Col md={4}>
-          <Card>
+          <Card className='card'>
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>Order Summary</h2>
@@ -138,8 +142,6 @@ const PlaceOrderScreen = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
-                  type="button"
-                  className="btn-block"
                   disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
                 >
