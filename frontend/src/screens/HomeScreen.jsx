@@ -2,9 +2,9 @@ import { Row, Col, Container } from 'react-bootstrap';
 import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import PromoCarousel from '../components/PromoCarousel';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
 import screensStyles from '../styles/screensStyles.css';
+import PromoCarousel from '../components/PromoCarousel';
 
 const HomeScreen = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
