@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import Button from "@mui/joy/Button";
 import Message from "../../components/Message";
@@ -10,7 +10,7 @@ import {
   useUpdateUserMutation,
   useGetUserDetailsQuery,
 } from "../../slices/usersApiSlice";
-import { set } from "mongoose";
+
 
 const UserEditScreen = () => {
   const { id: userId } = useParams();

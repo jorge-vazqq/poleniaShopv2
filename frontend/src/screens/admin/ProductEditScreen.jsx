@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import Button from "@mui/joy/Button";
 import Message from "../../components/Message";
@@ -11,7 +11,6 @@ import {
   useGetProductDetailsQuery,
   useUploadProductImageMutation,
 } from "../../slices/productsApiSlice";
-import { set } from "mongoose";
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
@@ -27,7 +26,6 @@ const ProductEditScreen = () => {
   const {
     data: product,
     isLoading,
-    refetch,
     error,
   } = useGetProductDetailsQuery(productId);
 
@@ -135,6 +133,7 @@ const ProductEditScreen = () => {
                 onChange={uploadFileHandler}
               ></Form.Control>
             </Form.Group>
+            {loadingUpload && <Loader />}
 
             <Form.Group controlId="brand" className="my-2">
               <Form.Label>Brand</Form.Label>

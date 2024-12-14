@@ -8,6 +8,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
+import SearchBox from "./SearchBox";
 import logo from "../assets/logo.png";
 import Button from "@mui/joy/Button";
 import Menu from "@mui/joy/Menu";
@@ -15,6 +16,7 @@ import MenuButton from "@mui/joy/MenuButton";
 import MenuItem from "@mui/joy/MenuItem";
 import Dropdown from "@mui/joy/Dropdown";
 import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
+import componentsStyles from '../styles/componentsStyles.css'
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -60,6 +62,7 @@ const Header = () => {
               {/* Conditionally render cart and sign in buttons based on location */}
               {!(isLoginPage || location.pathname === "/register") && (
                 <>
+                  <SearchBox />
                   <Button 
                   onClick={toggleDrawer}
                   sx={{ margin: 0.5 }}
