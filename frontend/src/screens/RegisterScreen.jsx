@@ -9,6 +9,7 @@ import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
 import Card from "@mui/joy/Card";
 import Button from "@mui/joy/Button";
+import { ListDivider } from "@mui/joy";
 
 const RegisterScreen = () => {
   const [name, setName] = useState("");
@@ -37,7 +38,7 @@ const RegisterScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
+      toast.error("Las contraseñas no coinciden!");
       return;
     } else {
       try {
@@ -54,45 +55,46 @@ const RegisterScreen = () => {
     
     <FormContainer>
       <Card className='card' sx={{mt: 8}}>
-      <h1>Sign Up</h1>
+      <h1>Registrate a Polenia</h1>
+      <ListDivider inset="gutter" />
 
       <Form onSubmit={submitHandler}>
 
       <Form.Group controlId="name" className="my-3">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Nombre</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter your name"
+            placeholder="Ingres tu nombre"
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="email" className="my-3">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>Correo</Form.Label>
           <Form.Control
             type="email"
-            placeholder="Enter email"
+            placeholder="Ingresa tu correo"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="password" className="my-3">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Contraseña</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Enter password"
+            placeholder="Ingresa tu contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="confirmPassword" className="my-3">
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>Confirma tu contraseña</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Confirm password"
+            placeholder="Confirmar contraseña"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
@@ -102,7 +104,7 @@ const RegisterScreen = () => {
           type="submit"
           disabled={isLoading}
         >
-          Register
+          Registrate
         </Button>
 
         {isLoading && <Loader />}
@@ -110,11 +112,11 @@ const RegisterScreen = () => {
 
       <Row className="py-3">
   <Col>
-    Already have an account?{" "}
+    Ya tienes una cuenta?{" "}
     <Link 
       to={
         redirect ? `/login?redirect=${redirect}` : "/login"}>
-      Login
+      Entrar
     </Link>
   </Col>
 </Row>

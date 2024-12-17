@@ -1,5 +1,6 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Order from "../models/orderModel.js";
+import Product from "../models/productModel.js";
 
 //@desc     Create new order
 //@route    POST /api/orders
@@ -37,6 +38,19 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
     const createOrder = await order.save();
 
+    for (const item of orderItems) {
+      const product = await Product.findById(item._id);
+
+      if (product) {
+        const quantity = Number(item.qty);
+        if (isNaN(quantity)) {
+          throw new Error(`Invalid quantity for product ID: ${item._id}`);
+        }
+
+        product.countInStock -= quantity;
+        await product.save();
+      }
+    }
     res.status(201).json(createOrder);
   }
 });

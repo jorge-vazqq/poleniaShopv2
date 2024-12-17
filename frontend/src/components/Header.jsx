@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DrawerFilters from "./InsetDrawer";
 
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { Badge, Navbar, Nav, Container } from "react-bootstrap";
+import { Badge, Navbar, Nav, Container, Row, Col } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,7 +16,8 @@ import MenuButton from "@mui/joy/MenuButton";
 import MenuItem from "@mui/joy/MenuItem";
 import Dropdown from "@mui/joy/Dropdown";
 import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
-import componentsStyles from '../styles/componentsStyles.css'
+import componentsStyles from "../styles/componentsStyles.css";
+import { ListDivider } from "@mui/joy";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -44,8 +45,8 @@ const Header = () => {
     }
   };
 
-  // Check if the current route is login page
-  const isLoginPage = location.pathname === "/login";
+  // Check if the current route is the homepage
+  const isHomePage = location.pathname === "/";
 
   return (
     <header>
@@ -60,24 +61,28 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               {/* Conditionally render cart and sign in buttons based on location */}
-              {!(isLoginPage || location.pathname === "/register") && (
+              {!(
+                location.pathname === "/login" ||
+                location.pathname === "/register"
+              ) && (
                 <>
                   <SearchBox />
-                  <Button 
-                  onClick={toggleDrawer}
-                  sx={{ margin: 0.5 }}
-                  ><FaShoppingCart sx={{ mr: 1 }} /> Cart
-                  {cartItems.length > 0 && (
-                    <Badge
-                      pill
-                      id="badge-color"
-                      style={{ marginLeft: "5px" }}
-                    >
-                      {cartItems.reduce((a, c) => a + c.qty, 0)}
-                    </Badge>
-                  )}</Button>
-                  {/* Render the DrawerFilters */}
-                  <DrawerFilters open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+                  <Button onClick={toggleDrawer} sx={{ margin: 0.5 }}>
+                    <FaShoppingCart sx={{ mr: 1 }} />
+                    {cartItems.length > 0 && (
+                      <Badge
+                        pill
+                        id="badge-color"
+                        style={{ marginLeft: "5px" }}
+                      >
+                        {cartItems.reduce((a, c) => a + c.qty, 0)}
+                      </Badge>
+                    )}
+                  </Button>
+                  <DrawerFilters
+                    open={drawerOpen}
+                    onClose={() => setDrawerOpen(false)}
+                  />
 
                   {userInfo ? (
                     <Dropdown>
@@ -85,11 +90,11 @@ const Header = () => {
                         endDecorator={<ArrowDropDown />}
                         sx={{ margin: 0.5 }}
                       >
-                        {userInfo.name}
+                       {userInfo.name}
                       </MenuButton>
                       <Menu size="md" placement="bottom-start">
                         <MenuItem component={Link} to="/profile">
-                          Profile
+                          Ordenes
                         </MenuItem>
                         <MenuItem onClick={logoutHandler}>Logout</MenuItem>
                       </Menu>
@@ -98,10 +103,10 @@ const Header = () => {
                     <LinkContainer to="/login">
                       <Button sx={{ margin: 0.5 }}>
                         <FaUser />
-                        Sign In
                       </Button>
                     </LinkContainer>
                   )}
+
                   {userInfo && userInfo.isAdmin && (
                     <Dropdown>
                       <MenuButton
@@ -113,6 +118,9 @@ const Header = () => {
                       <Menu placement="bottom-start">
                         <MenuItem component={Link} to="/admin/productlist">
                           Products
+                        </MenuItem>
+                        <MenuItem component={Link} to="/admin/promolist">
+                          Promos
                         </MenuItem>
                         <MenuItem component={Link} to="/admin/orderlist">
                           Orders
@@ -129,6 +137,34 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      {/* Conditionally render the additional row only on the homepage */}
+      {isHomePage && (
+        <Row className="additional-links-row justify-content-center mt-3">
+          <Container>
+            <Col className="text-center">
+              <Nav className="justify-content-center">
+                <LinkContainer to="/about">
+                  <Nav.Link>
+                    <h4>About Us</h4>
+                  </Nav.Link>
+                </LinkContainer>
+                <Nav.Link href="#contact">
+                  <h4>Contact</h4>
+                </Nav.Link>
+                <LinkContainer to="/faq">
+                  <Nav.Link>
+                    <h4>FAQ</h4>
+                  </Nav.Link>
+                </LinkContainer>
+                {/* Add any other links here */}
+              </Nav>
+              <div id="menu-links-divider"
+              />
+            </Col>
+          </Container>
+        </Row>
+      )}
     </header>
   );
 };

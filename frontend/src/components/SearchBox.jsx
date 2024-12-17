@@ -3,6 +3,8 @@ import { Form } from 'react-bootstrap';
 import { Button } from '@mui/joy';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Input from '@mui/joy/Input';
+import { FaSearch } from 'react-icons/fa';
 
 const SearchBox = () => {
   const navigate = useNavigate();
@@ -23,14 +25,16 @@ const SearchBox = () => {
 
   return (
     <Form onSubmit={submitHandler} className='d-flex'>
-      <Form.Control
+      <Input
+      sx={{ margin: 0.5 }}
         type='text'
         name='q'
         onChange={(e) => setKeyword(e.target.value)}
         value={keyword}
         placeholder='Search Products...'
         className='mr-sm-2 ml-sm-5'
-      ></Form.Control>
+        startDecorator={<FaSearch />} 
+      ></Input>
       <Button type='submit' sx={{ margin: 0.5 }}>
         Search
       </Button>

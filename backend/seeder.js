@@ -4,6 +4,8 @@ import colors from "colors";
 import users from "./data/users.js";
 import products from "./data/products.js";
 import Product from "./models/productModel.js";
+import promos from "./data/promos.js";
+import Promo from "./models/promoModel.js";
 import Order from "./models/orderModel.js";
 import connectDB from "./config/db.js";
 import User from "./models/userModel.js";
@@ -17,6 +19,7 @@ const importData = async () => {
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
+    await Promo.deleteMany();
 
     const createdUsers = await User.insertMany(users);
 
@@ -26,7 +29,12 @@ const importData = async () => {
       return { ...product, user: adminUser };
     });
 
+    const samplePromos = promos.map((promo) => {
+      return { ...promo};
+    });
+
     await Product.insertMany(sampleProducts);
+    await Promo.insertMany(samplePromos);
 
     console.log("Data Imported!".green.inverse);
     process.exit();
@@ -41,6 +49,7 @@ const destroyData = async () => {
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
+    await Promo.deleteMany();
 
     console.log("Data Destroyed!".red.inverse);
     process.exit();

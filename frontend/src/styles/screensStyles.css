@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 body {
-    background-color: #fffbf4; /* Change this to your desired color */
-  }
+  background-image: 
+  url('/public/images/background.png'),
+  linear-gradient(to bottom, #fffbf4, #fce3b8);
+  background-color: #fffbf4; /* Fallback color */
+  background-size: cover; /* This makes the image cover the entire background */
+  background-position: center; /* This centers the image */
+
+}
 
 h1 {
     color:  #6153e0;

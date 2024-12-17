@@ -46,12 +46,12 @@ const LoginScreen = () => {
   return (
     <FormContainer>
       <Card className='card' sx={{mt: 8,}}>
-      <h1>Sign In</h1>
+      <h1>Entrar a Polenia</h1>
       <ListDivider/>
 
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email" className="my-3">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>Cuenta de correo</Form.Label>
           <Form.Control
             type="email"
             placeholder="Enter email"
@@ -61,7 +61,7 @@ const LoginScreen = () => {
         </Form.Group>
 
         <Form.Group controlId="password" className="my-3">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Contraseña</Form.Label>
           <Form.Control
             type="password"
             placeholder="Enter password"
@@ -74,7 +74,7 @@ const LoginScreen = () => {
           type="submit"
           disabled={isLoading}
         >
-          Sign In
+          Entrar
         </Button>
 
         {isLoading && <Loader />}
@@ -82,11 +82,11 @@ const LoginScreen = () => {
 
       <Row className="py-3">
         <Col>
-          New Customer?{" "}
+          Nuevo cliente?{" "}
           <Link
             to={
               redirect ? `/register?redirect=${redirect}` : "/register"}>
-            Register
+            Registrate
           </Link>
         </Col>
       </Row>

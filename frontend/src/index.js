@@ -30,9 +30,14 @@ import ProfileScreen from './screens/ProfileScreen';
 import OrderListScreen from './screens/admin/OrderListScreen';
 import ProductListScreen from './screens/admin/ProductListScreen';
 import ProductEditScreen from './screens/admin/ProductEditScreen';
+import PromoListScreen from './screens/admin/PromoListScreen';
+import PromoEditScreen from './screens/admin/PromoEditScreen';
 import UserListScreen from './screens/admin/UserListScreen';
 import UserEditScreen from './screens/admin/UserEditScreen';
+import AboutUsScreen from './screens/AboutUsScreen';
+import Faq from './screens/FaqScreen';
 import theme from './styles/theme'; // Custom Joy UI theme
+import FaqScreen from './screens/FaqScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -43,6 +48,8 @@ const router = createBrowserRouter(
       <Route path="/search/:keyword/page/:pageNumber" element={<HomeScreen />} />
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/cart" element={<CartScreen />} />
+      <Route path="/about" element={<AboutUsScreen />} />
+      <Route path="/faq" element={<FaqScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
 
@@ -58,6 +65,9 @@ const router = createBrowserRouter(
         <Route path="/admin/orderlist" element={<OrderListScreen />} />
         <Route path="/admin/productlist" element={<ProductListScreen />} />
         <Route path="/admin/productlist/:pageNumber" element={<ProductListScreen />} />
+
+        <Route path="/admin/promolist" element={<PromoListScreen />} />
+        <Route path="/admin/promo/:id/edit" element={<PromoEditScreen />} />
 
         <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
         <Route path="/admin/userlist" element={<UserListScreen />} />

@@ -58,7 +58,7 @@ const ProfileScreen = () => {
   return (
     <Row>
       <Col md={3}>
-        <h2>User Profile</h2>
+        <h2>Perfil</h2>
 
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name" className="my-2">
@@ -108,7 +108,7 @@ const ProfileScreen = () => {
         </Form>
       </Col>
       <Col md={9}>
-        <h2>My Orders</h2>
+        <h2>Ordenes</h2>
         {isLoading ? (
           <Loader />
         ) : error ? (
@@ -119,11 +119,11 @@ const ProfileScreen = () => {
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>DATE</th>
+                <th>NUMERO DE ORDEN</th>
+                <th>FECHA</th>
                 <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
+                <th>PAGADO</th>
+                <th>ENTREGADO</th>
                 <th></th>
               </tr>
             </thead>
@@ -150,7 +150,7 @@ const ProfileScreen = () => {
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
                         <Button className='btn-sm' variant='soft'>
-                            Details
+                            Detalles
                         </Button>
                     </LinkContainer>
                   </td>

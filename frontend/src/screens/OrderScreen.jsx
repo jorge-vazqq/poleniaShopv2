@@ -119,7 +119,7 @@ const OrderScreen = () => {
     <Message variant="danger">{error.data.message}</Message>
   ) : (
     <>
-      <h1>Order Id: {order._id}</h1>
+      <h1>NUMERO DE ORDEN: {order._id}</h1>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
