@@ -1,15 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-body {
-  background-image: 
-  url('/public/images/background.png'),
-  linear-gradient(to bottom, #fffbf4, #fce3b8);
-  background-color: #fffbf4; /* Fallback color */
-  background-size: cover; /* This makes the image cover the entire background */
-  background-position: center; /* This centers the image */
-
-}
 
 h1 {
     color:  #6153e0;
@@ -86,4 +77,22 @@ b{
   
   .form-control:focus {
     color: black; /* Keep text color black when the input is focused */
+  }
+
+  .hero {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 1.5s ease, opacity 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 75vh; /* Or 100vh for full-screen height */
+    margin-top: -8vh; /* Move up slightly */
+    margin-bottom: 10vh; /* Move up slightly */
+  }
+  .hero.slide-up {
+    transform: translateY(0);
+    opacity: 1;
   }

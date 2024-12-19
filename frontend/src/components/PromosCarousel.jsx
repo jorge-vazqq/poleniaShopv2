@@ -6,33 +6,38 @@ import { useGetPromosQuery } from '../slices/promosApiSlice';  // Use promosApiS
 const PromoCarousel = () => {
   const { data: promos, isLoading, error } = useGetPromosQuery();  // Fetch promos instead of products
 
-  return isLoading ? null : error ? (
+  return isLoading ? (
+    <div style={{ height: '60vh', backgroundColor: '#f3f3f3' }} className="d-flex align-items-center justify-content-center">
+      <span>Loading...</span>
+    </div>
+  ) : error ? (
     <Message variant='danger'>{error?.data?.message || error.error}</Message>
   ) : (
-    <Carousel pause='hover' className='bg-primary mb-4'style={{ backgroundColor: 'transparent' }}>
-      {promos.map((promo) => (  // Map through promos
+    <Carousel pause='hover' className='bg-primary mb-4' style={{ backgroundColor: 'transparent' }}>
+      {promos.map((promo) => (
         <Carousel.Item key={promo._id}>
-          <Link to={`/promo/${promo._id}`}>  {/* Navigate to promo details */}
+          <Link to={`/promo/${promo._id}`}>
             <Image
-              src={promo.image}  // Use promo image
-              alt={promo.title}    // Use promo name
+              src={promo.image}
+              alt={promo.title}
               style={{
                 maxHeight: '60vh',
-                objectFit: 'contain',  // Ensure the image is contained without overflow
-                width: '100%'  // Make sure the image takes full width of its container
-              }} 
+                objectFit: 'contain',
+                width: '100%',
+              }}
               fluid
             />
-            <div>
             <Carousel.Caption className='carousel-caption'>
-              <h2 className='text-white text-right' style={{margin:0}} dangerouslySetInnerHTML={{
-                            __html: promo.title,
-                          }}/>
-              <p className='' style={{margin:0}} dangerouslySetInnerHTML={{
-                            __html: promo.description,
-                          }} />  {/* Display promo description */}
+              <h2
+                className='text-white text-right'
+                style={{ margin: 0 }}
+                dangerouslySetInnerHTML={{ __html: promo.title }}
+              />
+              <p
+                style={{ margin: 0 }}
+                dangerouslySetInnerHTML={{ __html: promo.description }}
+              />
             </Carousel.Caption>
-            </div>
           </Link>
         </Carousel.Item>
       ))}

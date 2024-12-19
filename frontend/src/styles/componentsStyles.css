@@ -52,3 +52,15 @@
       background: linear-gradient(135deg, #f07f63, #f8a668);
   }
 
+/* Initial State: Start off hidden and positioned lower */
+.logo {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Final State: Visible and slid up */
+.logo.slide-up {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DrawerFilters from "./InsetDrawer";
 
 import { useNavigate, Link, useLocation } from "react-router-dom";
@@ -22,10 +22,16 @@ import { ListDivider } from "@mui/joy";
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
+  const [logoVisible, setLogoVisible] = useState(false); // New state
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation(); // Get current route
+
+  useEffect(() => {
+    // Trigger logo animation on component mount
+    setLogoVisible(true);
+  }, []);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -53,9 +59,13 @@ const Header = () => {
       <Navbar className="custom-navbar" expand="md" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>
-              <img src={logo} alt="Polenia" />
-            </Navbar.Brand>
+          <Navbar.Brand>
+  <img
+    src={logo}
+    alt="Polenia"
+    className={`logo ${logoVisible ? "slide-up" : ""}`} // Add dynamic class
+  />
+</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
