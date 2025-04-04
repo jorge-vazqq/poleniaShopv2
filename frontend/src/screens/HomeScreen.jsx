@@ -9,16 +9,13 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import PromosCarousel from "../components/PromosCarousel";
 import Paginate from "../components/Paginate";
-import "../styles/screensStyles.css";
+
 
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams();
-  const [heroVisible, setHeroVisible] = useState(false); // New state
+  const [heroVisible, setHeroVisible] = useState(false);
 
-  // Fetch promos first
   const { data: promosData, isLoading: promosLoading } = useGetPromosQuery();
-
-  // Fetch products
   const {
     data: productsData,
     isLoading: productsLoading,
@@ -29,70 +26,38 @@ const HomeScreen = () => {
   });
 
   useEffect(() => {
-    // Trigger logo animation on component mount
     setHeroVisible(true);
   }, []);
 
   return (
     <div className="home-screen">
       <Container fluid className="py-4">
-        {/* Hero Section */}
         {!keyword && (
-          <div
-            className={`hero ${heroVisible ? "slide-up" : ""}`} // Add dynamic class
-          >
-            <h1 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
-              Welcome to Polenia
-            </h1>
-            <p style={{ fontSize: "1.2rem", marginBottom: "30px" }}>
-              Discover premium Ginger Beer at unbeatable prices!
-            </p>
-            <Nav.Link
-              href="#products"
-              style={{
-                display: "inline-block", // Ensure it only wraps the button
-                padding: 0, // Remove extra padding
-                margin: 0, // Remove extra margin
-              }}
-            >
+          <div className={`hero ${heroVisible ? "slide-up" : ""}`}>
+            <h1 className="hero-title">Welcome to Polenia</h1>
+            <p className="hero-subtitle">Discover premium Ginger Beer at unbeatable prices!</p>
+            <Nav.Link href="#products" className="hero-shop-now-link">
               <Button size="lg">Shop Now</Button>
             </Nav.Link>
           </div>
         )}
 
-        {/* Promos Carousel */}
         {!keyword && (
-          <div
-            style={{
-              minHeight: "60vh",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
+          <div className="promos-carousel-container">
             <PromosCarousel />
           </div>
         )}
 
-        {/* Products Section */}
-        <div
-          style={{ textAlign: "center", marginBottom: "40px" }}
-          id="products"
-        >
-          <h2 style={{ fontSize: "2rem", marginBottom: "10px" }}>
+        <div className="products-section" id="products">
+          <h2 className="products-title">
             {keyword ? "Search Results" : "Latest Products"}
           </h2>
-          <p>
-            {keyword
-              ? `Showing results for "${keyword}"`
-              : "Explore our latest additions."}
+          <p className="products-description">
+            {keyword ? `Showing results for "${keyword}"` : "Explore our latest additions."}
           </p>
           {keyword && (
             <Link to="/">
-              <Button
-                variant="outline-primary"
-                size="sm"
-                style={{ marginTop: "10px" }}
-              >
+              <Button variant="outline-primary" size="sm" className="go-back-button">
                 Go Back
               </Button>
             </Link>
@@ -102,9 +67,7 @@ const HomeScreen = () => {
         {productsLoading ? (
           <Loader />
         ) : error ? (
-          <Message variant="danger">
-            {error?.data?.message || error.error}
-          </Message>
+          <Message variant="danger">{error?.data?.message || error.error}</Message>
         ) : (
           <>
             <Row>
@@ -114,11 +77,7 @@ const HomeScreen = () => {
                 </Col>
               ))}
             </Row>
-            <Paginate
-              pages={productsData.pages}
-              page={productsData.page}
-              keyword={keyword ? keyword : ""}
-            />
+            <Paginate pages={productsData.pages} page={productsData.page} keyword={keyword || ""} />
           </>
         )}
       </Container>

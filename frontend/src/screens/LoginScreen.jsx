@@ -11,6 +11,7 @@ import Button from "@mui/joy/Button";
 import Card from '@mui/joy/Card';
 import { ListDivider } from "@mui/joy";
 
+
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,55 +45,53 @@ const LoginScreen = () => {
   };
 
   return (
-    <FormContainer>
-      <Card className='card' sx={{mt: 8,}}>
-      <h1>Entrar a Polenia</h1>
-      <ListDivider/>
-
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId="email" className="my-3">
-          <Form.Label>Cuenta de correo</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="password" className="my-3">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Button
-          type="submit"
-          disabled={isLoading}
-        >
-          Entrar
-        </Button>
-
-        {isLoading && <Loader />}
-      </Form>
-
-      <Row className="py-3">
-        <Col>
-          Nuevo cliente?{" "}
-          <Link
-            to={
-              redirect ? `/register?redirect=${redirect}` : "/register"}>
-            Registrate
-          </Link>
-        </Col>
-      </Row>
-      </Card>
-    </FormContainer>
+    <div id="login-container">
+      <FormContainer>
+        <Card id="login-card" sx={{ mt: 8 }}>
+          <h1 id="login-title">Entrar a Polenia</h1>
+          <ListDivider id="login-divider" />
+  
+          <Form onSubmit={submitHandler} id="login-form">
+            <Form.Group controlId="email" className="form-group">
+              <Form.Label>Cuenta de correo</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+  
+            <Form.Group controlId="password" className="form-group">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+  
+            <Button type="submit" disabled={isLoading} id="login-button">
+              Entrar
+            </Button>
+  
+            {isLoading && <Loader />}
+          </Form>
+  
+          <Row className="py-3" id="register-link">
+            <Col>
+              Nuevo cliente?{" "}
+              <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
+                Registrate
+              </Link>
+            </Col>
+          </Row>
+        </Card>
+      </FormContainer>
+    </div>
   );
+  
 };
 
 export default LoginScreen;

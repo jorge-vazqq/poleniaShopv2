@@ -23,6 +23,20 @@ const SearchBox = () => {
     }
   };
 
+  const buttonStyles = {
+    margin: 0.5,
+    padding: "8px 16px",
+    fontSize: "1rem",
+    fontWeight: "bold",
+    textTransform: "none",
+    borderRadius: "8px",
+    color: "#fff",
+    backgroundColor: "#007bff",
+    "&:hover": {
+      backgroundColor: "#0056b3",
+    },
+  };
+
   return (
     <Form onSubmit={submitHandler} className='d-flex'>
       <Input
@@ -35,7 +49,7 @@ const SearchBox = () => {
         className='mr-sm-2 ml-sm-5'
         startDecorator={<FaSearch />} 
       ></Input>
-      <Button type='submit' sx={{ margin: 0.5 }}>
+      <Button type='submit' sx={buttonStyles}>
         Search
       </Button>
     </Form>

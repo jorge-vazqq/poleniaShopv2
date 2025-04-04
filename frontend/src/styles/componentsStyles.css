@@ -1,13 +1,9 @@
 /* Header */
 .custom-navbar {
-  background-image: linear-gradient(to top, #fc9e3a, #f15b29); /* Gradient from one color to another */
+  background: linear-gradient(to top, #fc9e3a, #f15b29); /* Gradient from one color to another */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* External shadow */
 }
 
-.card{
-  box-shadow: var(--joy-shadow-lg);
-  margin-bottom: 2vh;
-}
 
 #badge-color{
     background-color:#d6e012 !important;
@@ -64,3 +60,5 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+

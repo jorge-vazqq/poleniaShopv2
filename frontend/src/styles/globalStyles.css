@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+
+body {
+  font-family: "Montserrat", sans-serif; /* Default font for the body */
+  background-color: linear-gradient(to top, #fc9e3a, #f15b29);
+}
+
+h1, h2, h3 {
+    color:  #6153e0;
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+p, b, .custom-link, .form-label {
+    color:  #6153e0;
+    font-family: "Montserrat", sans-serif;
+}
+
+.custom-link {
+    text-decoration: none;
+    font-weight: 400;
+    
+}
+
+.nav-link {
+    color: #6153e0;
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.nav-link:hover {
+    color: #ddc7ff !important;
+}
+
+.nav-link.active, .nav-link.active:hover {
+    color: #6153e0 !important;
+}
+
+.nav-link:not(.active):hover {
+    color: #ddc7ff !important;
+}
+
+.link-container.active {
+    color: inherit;
+    background-color: transparent;
+}
+
+.form-control {
+    color: black;
+}
+
+.form-control:focus {
+    color: black;
+}
+
+main {
+  min-height: 80vh; /* From index.css */
+}
+
+.rating span { /* From index.css */
+  margin: 0.1rem;
+}
+
+.rating svg { /* From index.css */
+  color: #f8e825;
+}
+
+.rating-text { /* From index.css */
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+}
+
+table td, table th { /* From index.css */
+  text-align: center;
+}
+
+.review { /* From index.css */
+  margin-top: 30px;
+}
+
+.review h2 { /* From index.css */
+  font-size: 24px;
+  background: #f4f4f4;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.review button { /* From index.css */
+  margin-top: 10px;
+}
+
+.carousel-caption { /* From index.css */
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.product-title {  /* From index.css */
+  height: 2.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Initial State: Start off hidden and positioned lower */
+.hero {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  justify-items: center;
+  margin-top: 10%;
+  margin-bottom: 40%;
+}
+
+/* Final State: Visible and slid up */
+.hero.slide-up {
+  opacity: 1;
+  transform: translateY(0);
+  justify-items: center;
+  margin-top: 10%;
+  margin-bottom: 40%;
+}
+
+.card{
+  margin-bottom: 20px;
+}
+
+.select{
+  max-width: 100px;
+}
+
+

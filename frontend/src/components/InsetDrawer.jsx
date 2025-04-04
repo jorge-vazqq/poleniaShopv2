@@ -7,7 +7,6 @@ import ModalClose from "@mui/joy/ModalClose";
 import Divider from "@mui/joy/Divider";
 import Stack from "@mui/joy/Stack";
 import { Grid } from "@mui/joy";
-
 import { Row, Col, ListGroup, Image, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
@@ -15,7 +14,6 @@ import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 import Card from "@mui/joy/Card";
 import { useDispatch, useSelector } from "react-redux";
-
 import Sheet from "@mui/joy/Sheet";
 
 export default function DrawerFilters({ open, onClose }) {
@@ -43,7 +41,6 @@ export default function DrawerFilters({ open, onClose }) {
   return (
     <React.Fragment>
       <Drawer
-        size="md"
         variant="plain"
         open={open}
         onClose={onClose}
@@ -51,8 +48,14 @@ export default function DrawerFilters({ open, onClose }) {
           content: {
             sx: {
               bgcolor: "transparent",
-              p: { md: 3, sm: 0 },
+              p: { xs: 1, md: 3 }, // More padding on larger screens
               boxShadow: "none",
+              // Use full width on extra-small screens and 35% on medium and up
+              width: { xs: "100%", md: "65%", lg: "35%" },
+              height: { xs: "100%", md: "auto" },
+              // Optionally, adjust positioning on mobile (e.g., bottom sheet)
+              position: { xs: "fixed", md: "relative" },
+              bottom: { xs: 0, md: "auto" },
             },
           },
         }}
@@ -82,6 +85,7 @@ export default function DrawerFilters({ open, onClose }) {
                       <Row>
                         <Col md={2}>
                           <Image
+                          className="mt-2"
                             src={item.image}
                             alt={item.name}
                             fluid
@@ -90,6 +94,7 @@ export default function DrawerFilters({ open, onClose }) {
                         </Col>
                         <Col md={3}>
                           <Link
+
                             to={`/product/${item._id}`}
                             className="custom-link"
                           >
@@ -116,6 +121,7 @@ export default function DrawerFilters({ open, onClose }) {
                         </Col>
                         <Col md={2}>
                           <Button
+                            className="mt-2"
                             onClick={() => removeFromCartHandler(item._id)}
                           >
                             <FaTrash />

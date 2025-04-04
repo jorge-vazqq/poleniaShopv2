@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-//import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Image, Form } from "react-bootstrap";
 import Card from "@mui/joy/Card";
@@ -22,18 +21,16 @@ import ListItemContent from "@mui/joy/ListItemContent";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import DrawerFilters from "../components/InsetDrawer";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
-
   const dispatch = useDispatch();
-  //const navigate = useNavigate();
 
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const {
     data: product,
@@ -49,11 +46,8 @@ const ProductScreen = () => {
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
-    toast.success("Product successfully added to the cart!");
-    //navigate('/cart');
+    /*toast.success("Product successfully added to the cart!");*/
   };
-
-  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = () => {
     setDrawerOpen((prev) => !prev);
@@ -61,13 +55,8 @@ const ProductScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     try {
-      await createReview({
-        productId,
-        rating,
-        comment,
-      }).unwrap();
+      await createReview({ productId, rating, comment }).unwrap();
       refetch();
       toast.success("Review created successfully");
       setRating(0);
@@ -88,17 +77,22 @@ const ProductScreen = () => {
       ) : (
         <>
           <Meta title={product.name} />
-          <Row>
-            <Col md={9}>
+          <Row id="product-container">
+            <Col md={9} id="product-details">
               <Card orientation="stack" className="card">
                 <Row>
                   <Col>
-                    <Image src={product.image} alt={product.name} fluid />
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fluid
+                      id="product-image"
+                    />
                   </Col>
                   <Col>
-                    <List>
+                    <List id="product-info">
                       <ListItem>
-                        <h3 style={{ margin: 0 }}>{product.name}</h3>
+                        <h3 className="product-name">{product.name}</h3>
                       </ListItem>
                       <ListItem>
                         <Rating
@@ -108,33 +102,27 @@ const ProductScreen = () => {
                       </ListItem>
                       <ListDivider inset="gutter" />
                       <ListItem>
-                        <p>${product.price}</p>
+                        <p className="product-price">${product.price}</p>
                       </ListItem>
                       <ListDivider inset="gutter" />
                       <ListItem>
-                        <p>{product.description}</p>
+                        <p className="product-description">
+                          {product.description}
+                        </p>
                       </ListItem>
                     </List>
                   </Col>
                 </Row>
-                <Row className="review">
+                <Row id="product-review">
                   <Col md={9}>
                     <List>
-                      <h2
-                        style={{
-                          backgroundColor: "transparent",
-                          borderColor: "transparent",
-                          margin: "0",
-                        }}
-                      >
-                        Reviews
-                      </h2>
+                      <h2 className="review-header">Reviews</h2>
                       <ListDivider inset="gutter" />
                       {product.reviews.length === 0 && (
                         <Message>No Reviews</Message>
                       )}
                       {product.reviews.map((review) => (
-                        <ListItem key={review._id}>
+                        <ListItem key={review._id} className="review-item">
                           <Row>
                             <strong>{review.name}</strong>
                             <Rating value={review.rating} />
@@ -143,30 +131,13 @@ const ProductScreen = () => {
                           </Row>
                         </ListItem>
                       ))}
-
-                      <h2
-                        style={{
-                          backgroundColor: "transparent",
-                          borderColor: "transparent",
-                          margin: "0",
-                        }}
-                      >
-                        Write a customer review
-                      </h2>
+                      <h2 className="review-header">Write a customer review</h2>
                       <ListDivider inset="gutter" />
                       <ListItem>
                         {loadingProductReview && <Loader />}
-
                         {userInfo ? (
-                          <Form
-                            onSubmit={submitHandler}
-                            style={{ width: "100%" }}
-                          >
-                            <Form.Group
-                              controlId="rating"
-                              className="my-2"
-                              style={{ width: "23%" }}
-                            >
+                          <Form onSubmit={submitHandler} className="review-form">
+                            <Form.Group controlId="rating" className="my-2">
                               <Form.Label>Rating</Form.Label>
                               <Form.Control
                                 as="select"
@@ -182,12 +153,11 @@ const ProductScreen = () => {
                                 <option value="5">5 - Excellent</option>
                               </Form.Control>
                             </Form.Group>
-
                             <Form.Group controlId="comment" className="my-2">
                               <Form.Label>Comment</Form.Label>
                               <Form.Control
                                 as="textarea"
-                                row="3"
+                                rows="3"
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
                               ></Form.Control>
@@ -211,43 +181,37 @@ const ProductScreen = () => {
                 </Row>
               </Card>
             </Col>
-
-            <Col md={3}>
+            <Col md={3} id="product-actions">
               <Card className="card">
                 <List>
                   <ListItem>
                     <ListItemContent>
-                      <b>${product.price}</b>
+                      <b className="product-price">${product.price}</b>
                     </ListItemContent>
                   </ListItem>
-
                   <ListItem>
                     <ListItemContent>
-                      <b>
+                      <b className="stock-status">
                         {product.countInStock > 0
                           ? "Disponible"
                           : "No disponible por el momento"}
                       </b>
                     </ListItemContent>
                   </ListItem>
-
                   {product.countInStock > 0 && (
                     <ListItem>
                       <ListItemContent>
                         <Select
+                          className='select'
                           value={qty}
                           onChange={(event, newValue) => setQty(newValue)}
                           disabled={product.countInStock === 0}
                         >
-                          {product.countInStock > 0 ? (
-                            [...Array(product.countInStock).keys()].map((x) => (
-                              <Option key={x + 1} value={x + 1}>
-                                {x + 1}
-                              </Option>
-                            ))
-                          ) : (
-                            <Option value={0}>Out of Stock</Option>
-                          )}
+                          {[...Array(product.countInStock).keys()].map((x) => (
+                            <Option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </Option>
+                          ))}
                         </Select>
                       </ListItemContent>
                     </ListItem>
@@ -256,8 +220,8 @@ const ProductScreen = () => {
                     <Button
                       disabled={product.countInStock === 0}
                       onClick={() => {
-                        toggleDrawer(); // Opens the drawer
-                        addToCartHandler(); // Adds the product to the cart
+                        toggleDrawer();
+                        addToCartHandler();
                       }}
                     >
                       Añadir al carrito

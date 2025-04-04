@@ -11,6 +11,7 @@ import Card from "@mui/joy/Card";
 import Button from "@mui/joy/Button";
 import { ListDivider } from "@mui/joy";
 
+
 const RegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,14 +22,12 @@ const RegisterScreen = () => {
   const navigate = useNavigate();
 
   const [register, { isLoading }] = useRegisterMutation();
-
   const { userInfo } = useSelector((state) => state.auth);
 
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
   const redirect = sp.get("redirect") || "/";
   
-
   useEffect(() => {
     if (userInfo) {
       navigate(redirect);
@@ -52,77 +51,66 @@ const RegisterScreen = () => {
   };
 
   return (
-    
     <FormContainer>
-      <Card className='card' sx={{mt: 8}}>
-      <h1>Registrate a Polenia</h1>
-      <ListDivider inset="gutter" />
+      <Card className='register-card'>
+        <h1 className='register-title'>Registrate a Polenia</h1>
+        <ListDivider className='register-divider' />
 
-      <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} className='register-form'>
+          <Form.Group controlId="name" className="form-group">
+            <Form.Label>Nombre</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Ingresa tu nombre"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-      <Form.Group controlId="name" className="my-3">
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Ingres tu nombre"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          <Form.Group controlId="email" className="form-group">
+            <Form.Label>Correo</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Ingresa tu correo"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId="email" className="my-3">
-          <Form.Label>Correo</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Ingresa tu correo"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          <Form.Group controlId="password" className="form-group">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Ingresa tu contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId="password" className="my-3">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Ingresa tu contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          <Form.Group controlId="confirmPassword" className="form-group">
+            <Form.Label>Confirma tu contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Confirmar contraseña"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId="confirmPassword" className="my-3">
-          <Form.Label>Confirma tu contraseña</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Confirmar contraseña"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          <Button type="submit" disabled={isLoading} className="register-button">
+            Registrate
+          </Button>
+          {isLoading && <Loader />}
+        </Form>
 
-        <Button
-          type="submit"
-          disabled={isLoading}
-        >
-          Registrate
-        </Button>
-
-        {isLoading && <Loader />}
-      </Form>
-
-      <Row className="py-3">
-  <Col>
-    Ya tienes una cuenta?{" "}
-    <Link 
-      to={
-        redirect ? `/login?redirect=${redirect}` : "/login"}>
-      Entrar
-    </Link>
-  </Col>
-</Row>
-</Card>
+        <Row className="register-footer">
+          <Col>
+            Ya tienes una cuenta?{" "}
+            <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>Entrar</Link>
+          </Col>
+        </Row>
+      </Card>
     </FormContainer>
-
   );
 };
 
